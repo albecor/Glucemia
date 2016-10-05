@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/CHAPAL/.m2/repository/javax/mail/mail/1.4.7/mail-1.4.7.jar;C:/Users/CHAPAL/.m2/repository/com/google/code/gson/gson/2.6.2/gson-2.6.2.jar;C:/Users/CHAPAL/.m2/repository/net/bootsfaces/bootsfaces/0.9.1/bootsfaces-0.9.1.jar;C:/Users/CHAPAL/.m2/repository/org/glassfish/javax.faces/2.2.7/javax.faces-2.2.7.jar;C:/Users/CHAPAL/.m2/repository/javax/javaee-web-api/7.0/javaee-web-api-7.0.jar;C:/Users/CHAPAL/.m2/repository/org/primefaces/themes/bootstrap/1.0.10/bootstrap-1.0.10.jar;C:/Users/CHAPAL/.m2/repository/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar;C:/Users/CHAPAL/.m2/repository/org/webjars/font-awesome/4.6.3/font-awesome-4.6.3.jar;C:/Users/CHAPAL/.m2/repository/javax/activation/activation/1.1/activation-1.1.jar;C:/Users/CHAPAL/.m2/repository/javax/servlet/jstl/1.2/jstl-1.2.jar;C:/Users/CHAPAL/.m2/repository/org/primefaces/primefaces/6.0/primefaces-6.0.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'C:/Users/CHAPAL/Desktop/haciendo/FhirGlucose/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2016. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/CHAPAL/Desktop/haciendo/FhirGlucose/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'FhirGlucose 1.0 API'
+-linkoffline
+'http://docs.oracle.com/javase/8/docs/api' 'C:/Users/CHAPAL/Desktop/haciendo/FhirGlucose/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'FhirGlucose 1.0 API'
