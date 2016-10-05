@@ -1,2 +1,0 @@
-Controler.DataSubject
-Controler.Subject

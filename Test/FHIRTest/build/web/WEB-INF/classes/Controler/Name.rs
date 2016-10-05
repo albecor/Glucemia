@@ -1,2 +1,0 @@
-Controler.DataName
-Controler.Name

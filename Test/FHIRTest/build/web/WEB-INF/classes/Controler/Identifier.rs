@@ -1,2 +1,0 @@
-Controler.Identifier
-Controler.DataIdentifier
