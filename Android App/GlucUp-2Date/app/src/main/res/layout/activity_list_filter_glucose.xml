@@ -83,6 +83,45 @@
         </LinearLayout>
     </ScrollView>
 
+    <ScrollView
+        android:id="@+id/scroll_filter1"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.CombinedChart
+                android:id="@+id/combi_chart_filter1"
+                android:layout_width="match_parent"
+                android:layout_height="500dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gráficos Separados"
+                android:id="@+id/show_linebar_filter1"
+                android:layout_gravity="center_horizontal" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart_filter1"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:visibility="gone" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bar_chart_filter1"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </ScrollView>
+
     <RelativeLayout
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"

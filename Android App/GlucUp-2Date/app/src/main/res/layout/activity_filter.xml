@@ -22,10 +22,17 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+
+
+    <ScrollView
+        android:id="@+id/scroll_filter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
@@ -84,11 +91,24 @@
                 android:textColor="@color/secondary_text" />
         </RadioGroup>
 
-        <!-- LAYOUT SEMANA -->
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch_filter"
+            android:layout_below="@+id/radioGroup"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:text="Mostrar lista"
+            app:showText="true"/>
+
+            <!-- LAYOUT SEMANA -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/radioGroup"
+            android:layout_below="@+id/switch_filter"
             android:id="@+id/semana_layout"
             android:layout_marginTop="24dp"
             android:layout_alignParentStart="true"
@@ -142,7 +162,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/radioGroup"
+            android:layout_below="@+id/switch_filter"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="24dp"
@@ -180,7 +200,7 @@
             android:orientation="vertical"
             android:id="@+id/value_layout"
             android:visibility="gone"
-            android:layout_below="@+id/radioGroup"
+            android:layout_below="@+id/switch_filter"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
 
@@ -279,17 +299,20 @@
         </RelativeLayout>
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_result"
             android:id="@+id/btn_show"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="41dp"
+            android:layout_below="@+id/switch_filter"
+            android:layout_marginTop="350dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/button_default_bg"
             android:visibility="gone" />
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
