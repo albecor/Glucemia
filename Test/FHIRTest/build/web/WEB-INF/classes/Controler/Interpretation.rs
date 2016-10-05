@@ -1,2 +1,0 @@
-Controler.DataInter
-Controler.Interpretation

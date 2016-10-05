@@ -28,6 +28,10 @@ import magnusdroid.com.glucup_2date.Model.MDetailPacient;
 import magnusdroid.com.glucup_2date.Model.PrefManager;
 import magnusdroid.com.glucup_2date.R;
 
+/**
+ * Activity to search patient with no relationship. Use ThemDialog style for show as
+ * a Dialog and appear on top from the UI. If a patient is found, send the response to {@link PacienteDetailActivity}
+ */
 public class SearchActivity extends AppCompatActivity {
 
     //UI References
@@ -45,8 +49,6 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        // Set up shared preferences.
-        PrefManager prefManager = new PrefManager(this);
         // Set up toolbar and action bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_search);
         setSupportActionBar(toolbar);

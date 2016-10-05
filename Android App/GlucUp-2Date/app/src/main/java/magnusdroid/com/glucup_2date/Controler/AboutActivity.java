@@ -13,7 +13,7 @@ import magnusdroid.com.glucup_2date.R;
 
 /**
  * Show info about GlucUp2Date: Developed and funded
- * Call by {@link PersonalActivity} and {@link PacientListFragment}
+ * Call by {@link PacienteListActivity} and {@link PacientListFragment}
  */
 public class AboutActivity extends AppCompatActivity {
 

@@ -1,2 +1,0 @@
-Controler.DataValue
-Controler.Value

@@ -74,11 +74,11 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
     private RecyclerView recycler, recycler1;
     private RecyclerView.Adapter adapter, adapter1;
     private RelativeLayout rlayout;
-    private ScrollView scrollView;
+    private ScrollView scrollView, scrollView1;
     private TextView txtv;
-    private LineChart mLineChart;
-    protected BarChart mBarChart;
-    private CombinedChart mCombiChart;
+    private LineChart mLineChart, mLineChart1;
+    protected BarChart mBarChart, mBarChart1;
+    private CombinedChart mCombiChart, mCombiChart1;
     // Get shared preferences
     private PrefManager prefManager;
     // Utilities
@@ -93,12 +93,10 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
     private String maxvalue;
     private String fixvalue;
     private String unit;
-    private XAxis xBarAxis;
-    private XAxis xCombiAxis;
-    private YAxis leftBarAxis, leftLineAxis, leftCombiAxis;
-    private ArrayList<Entry> yLineValues;
-    private ArrayList<BarEntry> yBarValues;
-    private ArrayList<String> xAxes;
+    private YAxis leftBarAxis, leftLineAxis, leftCombiAxis, leftBarAxis1, leftLineAxis1, leftCombiAxis1;
+    private ArrayList<Entry> yLineValues, yLineValues1;
+    private ArrayList<BarEntry> yBarValues, yBarValues1;
+    private ArrayList<String> xAxes, xAxes1;
     private MyMarkerView mv;
     // Model
     private MDateGlucose mDateGlucose;
@@ -138,8 +136,11 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
         }
         // Set up widget and utilites
         xAxes = new ArrayList<>();
+        xAxes1 = new ArrayList<>();
         yLineValues = new ArrayList<>();
         yBarValues = new ArrayList<>();
+        yLineValues1 = new ArrayList<>();
+        yBarValues1 = new ArrayList<>();
         txtv = (TextView) findViewById(R.id.section_label);
         rlayout = (RelativeLayout) findViewById(R.id.novlauefilter);
         mFab = (FloatingActionButton) findViewById(R.id.fab_date_gluc);
@@ -186,25 +187,67 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
         mCombiChart.setDrawOrder(new CombinedChart.DrawOrder[]{
                 CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.CANDLE, CombinedChart.DrawOrder.LINE, CombinedChart.DrawOrder.SCATTER
         });
+        scrollView1 = (ScrollView) findViewById(R.id.scroll_filter1);
+        mLineChart1 = (LineChart) findViewById(R.id.line_chart_filter1);
+        // no description text
+        mLineChart1.setDescription("");
+        mLineChart1.setNoDataTextDescription("You need to provide data for the chart.");
+        // enable touch gestures
+        mLineChart1.setTouchEnabled(true);
+        mLineChart1.setDrawGridBackground(false);
+        // enable scaling and dragging
+        mLineChart1.setDragEnabled(false);
+        mLineChart1.setScaleEnabled(false);
+        // if disabled, scaling can be done on x- and y-axis separately
+        mLineChart1.setPinchZoom(false);
+        mLineChart1.setDrawGridBackground(false);
+        mLineChart1.getLegend().setEnabled(false);
+        mBarChart1 = (BarChart) findViewById(R.id.bar_chart_filter1);
+        // no description text
+        mBarChart1.setDescription("");
+        mBarChart1.setNoDataTextDescription("You need to provide data for the chart.");
+        mBarChart1.setDrawBarShadow(false);
+        mBarChart1.setDrawGridBackground(false);
+        mBarChart1.setScaleEnabled(false);
+        mBarChart1.setPinchZoom(false);
+        mBarChart1.setDragEnabled(false);
+        mBarChart1.getLegend().setEnabled(false);
+        mCombiChart1 = (CombinedChart) findViewById(R.id.combi_chart_filter1);
+        mCombiChart1.setDescription("");
+        mCombiChart1.setDrawGridBackground(false);
+        mCombiChart1.setDrawBarShadow(false);
+        mCombiChart1.setPinchZoom(false);
+        mCombiChart1.setDragEnabled(false);
+        mCombiChart1.getLegend().setEnabled(false);
+        // draw bars behind lines
+        mCombiChart1.setDrawOrder(new CombinedChart.DrawOrder[]{
+                CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.CANDLE, CombinedChart.DrawOrder.LINE, CombinedChart.DrawOrder.SCATTER
+        });
         XAxis xLineAxis = mLineChart.getXAxis();
         xLineAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xLineAxis.setTextSize(10f);
         xLineAxis.setDrawGridLines(false);
         xLineAxis.setDrawAxisLine(true);
         xLineAxis.setTextColor(R.color.primary_text);
-        xBarAxis = mBarChart.getXAxis();
+        XAxis xLineAxis1 = mLineChart1.getXAxis();
+        xLineAxis1.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xLineAxis1.setTextSize(10f);
+        xLineAxis1.setDrawGridLines(false);
+        xLineAxis1.setDrawAxisLine(true);
+        xLineAxis1.setTextColor(R.color.primary_text);
+        XAxis xBarAxis = mBarChart.getXAxis();
         xBarAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xBarAxis.setTextSize(10f);
         xBarAxis.setDrawGridLines(false);
         xBarAxis.setDrawAxisLine(true);
         xBarAxis.setTextColor(R.color.primary_text);
-        xCombiAxis = mCombiChart.getXAxis();
+        XAxis xCombiAxis = mCombiChart.getXAxis();
         xCombiAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xCombiAxis.setTextSize(10f);
         xCombiAxis.setDrawGridLines(false);
         xCombiAxis.setDrawAxisLine(true);
         xCombiAxis.setTextColor(R.color.primary_text);
-        leftBarAxis = mBarChart.getAxisLeft();
+        leftBarAxis = leftBarAxis1 = mBarChart.getAxisLeft();
         leftBarAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftBarAxis.setDrawAxisLine(true);
         leftBarAxis.setDrawGridLines(false);
@@ -213,7 +256,10 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
         YAxis rightAxis = mBarChart.getAxisRight();
         rightAxis.setDrawGridLines(false);
         rightAxis.setEnabled(false);
-        leftLineAxis = mLineChart.getAxisLeft();
+        YAxis rightAxis1 = mBarChart1.getAxisRight();
+        rightAxis1.setDrawGridLines(false);
+        rightAxis1.setEnabled(false);
+        leftLineAxis = leftLineAxis1 = mLineChart.getAxisLeft();
         leftLineAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftLineAxis.setDrawAxisLine(true);
         leftLineAxis.setDrawGridLines(false);
@@ -222,7 +268,10 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
         YAxis rightLineAxis = mLineChart.getAxisRight();
         rightLineAxis.setDrawGridLines(false);
         rightLineAxis.setEnabled(false);
-        leftCombiAxis = mCombiChart.getAxisLeft();
+        YAxis rightLineAxis1 = mLineChart1.getAxisRight();
+        rightLineAxis1.setDrawGridLines(false);
+        rightLineAxis1.setEnabled(false);
+        leftCombiAxis = leftCombiAxis1 = mCombiChart.getAxisLeft();
         leftCombiAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftCombiAxis.setDrawAxisLine(true);
         leftCombiAxis.setDrawGridLines(false);
@@ -231,13 +280,10 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
         YAxis rightCombiAxis = mCombiChart.getAxisRight();
         rightCombiAxis.setDrawGridLines(false);
         rightCombiAxis.setEnabled(false);
-        mShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mBarChart.setVisibility(View.VISIBLE);
-                mLineChart.setVisibility(View.VISIBLE);
-            }
-        });
+        YAxis rightCombiAxis1 = mCombiChart1.getAxisRight();
+        rightCombiAxis1.setDrawGridLines(false);
+        rightCombiAxis1.setEnabled(false);
+        mShow.setOnClickListener(this);
         mFab.setOnClickListener(this);
         mFab1.setOnClickListener(this);
         mFab2.setOnClickListener(this);
@@ -271,9 +317,13 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
             document = prefManager.getDoc();
             recycler.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
-        }else if(mFlag == 2){
+        }else if(mFlag == 3 || mFlag == 2){
             recycler.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
+            document = mDoc;
+        }else if(mFlag == 4){
+            recycler.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
             document = mDoc;
         }
         Log.w("Doc"," "+document);
@@ -302,14 +352,35 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                 newGluc();
                 break;
             case R.id.fab_date_gluc2:
-                if (recycler.getVisibility() == View.VISIBLE) {
+                if (recycler.getVisibility() == View.VISIBLE && scrollView.getVisibility() == View.GONE
+                        && scrollView1.getVisibility() == View.GONE) {
+                    scrollView.setVisibility(View.GONE);
+                    scrollView1.setVisibility(View.GONE);
                     recycler.setVisibility(View.GONE);
                     recycler1.setVisibility(View.VISIBLE);
                     unit = "mmol/l";
-                } else{
+                } else if (recycler.getVisibility() == View.GONE && scrollView.getVisibility() == View.GONE
+                        && scrollView1.getVisibility() == View.GONE) {
+                    scrollView.setVisibility(View.GONE);
+                    scrollView1.setVisibility(View.GONE);
                     recycler.setVisibility(View.VISIBLE);
                     recycler1.setVisibility(View.GONE);
                     unit = "mg/dl";
+                } else if (scrollView.getVisibility() == View.VISIBLE && recycler.getVisibility() == View.GONE
+                        && recycler1.getVisibility() == View.GONE) {
+                    recycler.setVisibility(View.GONE);
+                    recycler1.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.GONE);
+                    scrollView1.setVisibility(View.VISIBLE);
+                    unit = "mmol/l";
+                }else if (scrollView.getVisibility() == View.GONE && recycler.getVisibility() == View.GONE
+                        && recycler1.getVisibility() == View.GONE) {
+                    recycler.setVisibility(View.GONE);
+                    recycler1.setVisibility(View.GONE);
+                    scrollView.setVisibility(View.VISIBLE);
+                    scrollView1.setVisibility(View.GONE);
+                    unit = "mg/dl";
+
                 }
                 /*if(med ==0){
                     Task(med);
@@ -320,6 +391,19 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                 }*/
                 isFabOpen = true;
                 animateFAB();
+                break;
+            case R.id.show_linebar_filter:
+                if (scrollView.getVisibility() == View.VISIBLE){
+                    mBarChart.setVisibility(View.VISIBLE);
+                    mLineChart.setVisibility(View.VISIBLE);
+                    mBarChart1.setVisibility(View.GONE);
+                    mLineChart1.setVisibility(View.GONE);
+                }else if (scrollView1.getVisibility() == View.VISIBLE){
+                    mBarChart1.setVisibility(View.VISIBLE);
+                    mLineChart1.setVisibility(View.VISIBLE);
+                    mBarChart.setVisibility(View.GONE);
+                    mLineChart.setVisibility(View.GONE);
+                }
                 break;
         }
     }
@@ -464,7 +548,10 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
             glucList1.clear();
             yLineValues.clear();
             yBarValues.clear();
+            yLineValues1.clear();
+            yBarValues1.clear();
             xAxes.clear();
+            xAxes1.clear();
             try {
                 jObject = mDateGlucose.getDay(mDoc, mDate, "0");
                 mInt = jObject.getInt("status");
@@ -511,6 +598,8 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                         }
                         listGluc.setUnit(mUnit1);
                         listGluc.setValue(value);
+                        yLineValues.add(new Entry(Float.parseFloat(value), i));
+                        yBarValues.add(new BarEntry(Float.parseFloat(value), i));
                         //ListGluc for mg/dl
                         ListGluc listGluc1 = new ListGluc();
                         listGluc1.setIssued(jObject.getString("issued"));
@@ -527,9 +616,10 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                         listGluc1.setValue(value);
                         glucList.add(listGluc);
                         glucList1.add(listGluc1);
-                        yLineValues.add(new Entry(Float.parseFloat(value), i));
-                        yBarValues.add(new BarEntry(Float.parseFloat(value), i));
+                        yLineValues1.add(new Entry(Float.parseFloat(value), i));
+                        yBarValues1.add(new BarEntry(Float.parseFloat(value), i));
                         xAxes.add(i, jObject.getString("issued"));
+                        xAxes1.add(i, jObject.getString("issued"));
                     }
                 }else if(mInt == 0){
                     mBoolean = false;
@@ -551,6 +641,9 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                 mLineChart.animateXY(3000, 3000);
                 mBarChart.animateY(2500);
                 mCombiChart.animateXY(3000, 2500);
+                mLineChart1.animateXY(3000, 3000);
+                mBarChart1.animateY(2500);
+                mCombiChart1.animateXY(3000, 2500);
                 if(unit.equalsIgnoreCase("mmol/l")){
                     leftBarAxis.setAxisMinValue(0f);
                     leftBarAxis.setAxisMaxValue(10f);
@@ -559,12 +652,12 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                     leftCombiAxis.setAxisMinValue(0f);
                     leftCombiAxis.setAxisMaxValue(10f);
                 }else if(unit.equalsIgnoreCase("mg/dl")){
-                    leftBarAxis.setAxisMinValue(60f);
-                    leftBarAxis.setAxisMaxValue(190f);
-                    leftLineAxis.setAxisMinValue(60f);
-                    leftLineAxis.setAxisMaxValue(190f);
-                    leftCombiAxis.setAxisMinValue(60f);
-                    leftCombiAxis.setAxisMaxValue(190f);
+                    leftBarAxis1.setAxisMinValue(60f);
+                    leftBarAxis1.setAxisMaxValue(190f);
+                    leftLineAxis1.setAxisMinValue(60f);
+                    leftLineAxis1.setAxisMaxValue(190f);
+                    leftCombiAxis1.setAxisMinValue(60f);
+                    leftCombiAxis1.setAxisMaxValue(190f);
                 }
                 //Fetch the data and populate linechart
                 LineDataSet set1 = new LineDataSet(yLineValues, "Muestras");
@@ -578,6 +671,17 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                         ContextCompat.getColor(getApplicationContext(), R.color.low_value),
                         ContextCompat.getColor(getApplicationContext(), R.color.high_value),
                         ContextCompat.getColor(getApplicationContext(), R.color.primary_text)});
+                LineDataSet set3 = new LineDataSet(yLineValues1, "Muestras");
+                set3.setAxisDependency(YAxis.AxisDependency.LEFT);
+                set3.setValueTextSize(15f);
+                set3.setCircleColor(Color.WHITE);
+                set3.setLineWidth(2f);
+                MyBarDataSet set4 = new MyBarDataSet(yBarValues1, "");
+                set4.setValueTextSize(15f);
+                set4.setColors(new int[]{ContextCompat.getColor(getApplicationContext(), R.color.normal_value),
+                        ContextCompat.getColor(getApplicationContext(), R.color.low_value),
+                        ContextCompat.getColor(getApplicationContext(), R.color.high_value),
+                        ContextCompat.getColor(getApplicationContext(), R.color.primary_text)});
                 // use the interface LineDataSet - BarDataSet
                 ArrayList<LineDataSet> lineDataSets = new ArrayList<>();
                 lineDataSets.add(set1);
@@ -585,6 +689,12 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                 barDataSets.add(set2);
                 LineData lineData = new LineData(xAxes, lineDataSets);
                 BarData barData = new BarData(xAxes, barDataSets);
+                ArrayList<LineDataSet> lineDataSets1 = new ArrayList<>();
+                lineDataSets1.add(set3);
+                ArrayList<BarDataSet> barDataSets1 = new ArrayList<>();
+                barDataSets1.add(set4);
+                LineData lineData1 = new LineData(xAxes1, lineDataSets1);
+                BarData barData1 = new BarData(xAxes1, barDataSets1);
                 //Fetch the data and populate combinedchart
                 LineData d = new LineData(xAxes, set1);
                 d.addDataSet(set1);
@@ -592,20 +702,36 @@ public class ListGlucoseActivity extends AppCompatActivity implements View.OnCli
                 CombinedData combinedData = new CombinedData(xAxes);
                 combinedData.setData(d);
                 combinedData.setData(db);
+                LineData d1 = new LineData(xAxes1, set3);
+                d1.addDataSet(set3);
+                BarData db1 = new BarData(xAxes1, set4);
+                CombinedData combinedData1 = new CombinedData(xAxes1);
+                combinedData1.setData(d1);
+                combinedData1.setData(db1);
                 // create a custom MarkerView (extend MarkerView) and specify the layout
                 // to use for it
                 mv = new MyMarkerView(getApplicationContext(), R.layout.custom_marker_view);
                 // set the marker to the chart
                 mLineChart.setMarkerView(mv);
+                mLineChart1.setMarkerView(mv);
                 // create a data object with the datasets
                 mLineChart.setData(lineData);
                 mLineChart.invalidate();
+                mLineChart1.setData(lineData1);
+                mLineChart1.invalidate();
                 mBarChart.setData(barData);
                 mBarChart.invalidate();
+                mBarChart1.setData(barData1);
+                mBarChart1.invalidate();
                 mCombiChart.setData(combinedData);
                 mCombiChart.invalidate();
+                mCombiChart1.setData(combinedData1);
+                mCombiChart1.invalidate();
             }else{
                 recycler.setVisibility(View.GONE);
+                recycler1.setVisibility(View.GONE);
+                scrollView.setVisibility(View.GONE);
+                scrollView1.setVisibility(View.GONE);
                 rlayout.setVisibility(View.VISIBLE);
                 txtv.setText("No hay registro para este día");
                 dialog();

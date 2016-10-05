@@ -1,2 +1,0 @@
-Controler.DataTelecom
-Controler.Telecom

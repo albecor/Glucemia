@@ -74,7 +74,6 @@ public class DayOfWeekFragment extends Fragment implements View.OnClickListener 
     private LineChart mLineChart;
     protected BarChart mBarChart;
     private CombinedChart mCombiChart;
-    private Button mShow;
     // Get shared preferences
     private PrefManager prefManager;
     // Utilities
@@ -84,15 +83,12 @@ public class DayOfWeekFragment extends Fragment implements View.OnClickListener 
     private Animation fab_open,fab_close,rotate_forward,rotate_backward;
     private int med;
     private String date, unit, value, mPatient;
-    private XAxis xLineAxis, xBarAxis, xCombiAxis;
     private YAxis leftBarAxis, leftLineAxis, leftCombiAxis;
     private ArrayList<Entry> yLineValues;
     private ArrayList<BarEntry> yBarValues;
     private ArrayList<String> xAxes;
     private MyMarkerView mv;
     private ProgressDialog progress;
-    // Model
-    private MDateGlucose mDateGlucose;
     // JsonObject response from server
     private JSONObject jObject;
     private JSONArray jArray;
@@ -148,7 +144,7 @@ public class DayOfWeekFragment extends Fragment implements View.OnClickListener 
         rotate_forward = AnimationUtils.loadAnimation(getContext(),R.anim.rotate_forward);
         rotate_backward = AnimationUtils.loadAnimation(getContext(),R.anim.rotate_backward);
         scrollView = (ScrollView) view.findViewById(R.id.scroll_weekday);
-        mShow = (Button) view.findViewById(R.id.show_linebar_weekday);
+        Button mShow = (Button) view.findViewById(R.id.show_linebar_weekday);
         mLineChart = (LineChart) view.findViewById(R.id.line_chart_weekday);
         // no description text
         mLineChart.setDescription("");
@@ -183,19 +179,19 @@ public class DayOfWeekFragment extends Fragment implements View.OnClickListener 
         // draw bars behind lines
         mCombiChart.setDrawOrder(new CombinedChart.DrawOrder[]{
                 CombinedChart.DrawOrder.BAR, CombinedChart.DrawOrder.LINE});
-        xLineAxis = mLineChart.getXAxis();
+        XAxis xLineAxis = mLineChart.getXAxis();
         xLineAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xLineAxis.setTextSize(10f);
         xLineAxis.setDrawGridLines(false);
         xLineAxis.setDrawAxisLine(true);
-        xLineAxis.setTextColor(R.color.primary_text);        
-        xBarAxis = mBarChart.getXAxis();
+        xLineAxis.setTextColor(R.color.primary_text);
+        XAxis xBarAxis = mBarChart.getXAxis();
         xBarAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xBarAxis.setTextSize(10f);
         xBarAxis.setDrawGridLines(false);
         xBarAxis.setDrawAxisLine(true);
         xBarAxis.setTextColor(R.color.primary_text);
-        xCombiAxis = mCombiChart.getXAxis();
+        XAxis xCombiAxis = mCombiChart.getXAxis();
         xCombiAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xCombiAxis.setTextSize(10f);
         xCombiAxis.setDrawGridLines(false);
@@ -268,9 +264,13 @@ public class DayOfWeekFragment extends Fragment implements View.OnClickListener 
             document = prefManager.getDoc();
             recycler.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
-        }else if(mFlag == 2){
+        }else if(mFlag == 3 || mFlag == 2){
             recycler.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
+            document = mPatient;
+        }else if(mFlag == 4){
+            recycler.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
             document = mPatient;
         }
             downloadDate = new DownloadDate(document, date, Mmed);
@@ -350,7 +350,8 @@ public class DayOfWeekFragment extends Fragment implements View.OnClickListener 
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            mDateGlucose = new MDateGlucose();
+            //Model
+            MDateGlucose mDateGlucose = new MDateGlucose();
             DecimalFormat df = new DecimalFormat("#.##");
             glucList.clear();
             yLineValues.clear();

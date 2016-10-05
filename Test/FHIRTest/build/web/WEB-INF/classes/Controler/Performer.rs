@@ -1,2 +1,0 @@
-Controler.DataPerformer
-Controler.Performer
