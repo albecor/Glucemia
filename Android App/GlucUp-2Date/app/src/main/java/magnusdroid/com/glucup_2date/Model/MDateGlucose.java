@@ -20,6 +20,8 @@ import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import magnusdroid.com.glucup_2date.Class.Global;
+
 /**
  * Model to connect Android App to the server. Use HtppURLConnection class to build the request and
  * add the headers with the data.
@@ -28,12 +30,15 @@ import java.util.Map;
 public class MDateGlucose {
     private JSONObject jsonObject;
     private String response;
+    private Global global;
 
     public JSONObject getDay(String document, String date, String flag) throws JSONException{
 
         jsonObject = new JSONObject();
+        global = new Global();
 
-        String urlServer = "http://186.113.30.230:8080/Glucometrias/DateFilterGlucose";
+        String urlServer = global.getUrl()+"DateFilterGlucose";
+        Log.w("urlServer ", ""+urlServer);
         Map<String,Object> map = new LinkedHashMap<>();
 
         try {
@@ -70,6 +75,8 @@ public class MDateGlucose {
                     sb.append((char) c);
                 response = sb.toString();
                 jsonObject = new JSONObject(response);
+
+                Log.w("response", "" + response);
             }else {
                 jsonObject.put("status",3);
             }

@@ -17,6 +17,8 @@ import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import magnusdroid.com.glucup_2date.Class.Global;
+
 /**
  * Model to connect Android App to the server. Use HtppURLConnection class to build the request and
  * add the headers with the data.
@@ -26,12 +28,12 @@ public class MRegisterGlucose {
 
     private JSONObject jsonObject;
     private String response;
+    private Global global;
 
     public JSONObject sendGluc(String document, String value, String state, String fecha, String personal) throws JSONException {
 
-
-        //String urlServer = "http://"+ipServer+":8084/FHIRTest/RegisterGlucose";
-        String urlServer = "http://186.113.30.230:8080/Glucometrias/RegisterGlucose";
+        global = new Global();
+        String urlServer = global.getUrl()+"RegisterGlucose";
         Map<String,Object> map = new LinkedHashMap<>();
 
         try {

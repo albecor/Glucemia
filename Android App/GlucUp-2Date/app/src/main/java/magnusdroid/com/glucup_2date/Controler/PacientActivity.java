@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import magnusdroid.com.glucup_2date.Class.Global;
 import magnusdroid.com.glucup_2date.Model.PrefManager;
 import magnusdroid.com.glucup_2date.R;
 
@@ -34,6 +35,7 @@ public class PacientActivity extends AppCompatActivity
     private TextView mNameView;
     // Get shared preferences
     private PrefManager prefManager;
+    private Global global = new Global();
     private DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +123,7 @@ public class PacientActivity extends AppCompatActivity
         } else if (id == R.id.nav_web) {
             t = 1;
             Intent myWebLink = new Intent(Intent.ACTION_VIEW);
-            myWebLink.setData(Uri.parse("http://186.113.30.230:8080/Glucometrias"));
+            myWebLink.setData(Uri.parse(global.getUrl()+"Glucometrias"));
             startActivity(myWebLink);
         } else if (id == R.id.nav_off) {
             fragmentClass = LogOutFragment.class;

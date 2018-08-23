@@ -18,6 +18,8 @@ import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import magnusdroid.com.glucup_2date.Class.Global;
+
 /**
  * Model to connect Android App to the server. Use HtppURLConnection class to build the request and
  * add the headers with the data.
@@ -26,11 +28,12 @@ import java.util.Map;
 public class MSendFCM {
 
     private JSONObject jsonObject;
+    private Global global;
 
     public JSONObject sendToken(String token, String document) throws JSONException {
 
-        //String urlServer = "http://" + ipServer + ":8084/FHIR/FCM_Server";
-        String urlServer = "http://186.113.30.230:8080/Glucometrias/FCM_Server";
+        global = new Global();
+        String urlServer = global.getUrl()+"FCM_Server";
         String error = "{'status':3}";
         Map<String, Object> map = new LinkedHashMap<>();
 

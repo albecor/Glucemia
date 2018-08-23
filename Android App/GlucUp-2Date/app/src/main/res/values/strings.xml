@@ -130,7 +130,7 @@
     <string name="login_check_title">Without network</string>
     <string name="login_issued_server">Error to server connection</string>
     <string name="filter_record_not_found">Not record to filter entry</string>
-    <string name="ipserver" translatable="false">http://186.113.30.230:8080/Glucemia/</string>
+    <string name="ipserver" translatable="false">http://172.16.8.213:8080/Glucometrias/</string>
     <string name="back_filterweek">Back</string>
 
     <!-- TODO: Remove or change this placeholder text -->
