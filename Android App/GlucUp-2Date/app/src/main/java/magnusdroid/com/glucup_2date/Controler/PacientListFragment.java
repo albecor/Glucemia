@@ -123,6 +123,7 @@ public class PacientListFragment extends Fragment implements View.OnClickListene
     }
 
     /**
+     *
      * See: {@link ChartFragment#Task(int)}
      */
     private void Task(){
@@ -134,6 +135,7 @@ public class PacientListFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        Log.d("ID FAB"," "+id);
         switch (id){
             case R.id.fab_pacient:
                 animateFAB();
@@ -237,6 +239,7 @@ public class PacientListFragment extends Fragment implements View.OnClickListene
             try {
                 JSONObject jObject = mList.getDay(mDoc, date, "0");
                 mInteger = jObject.getInt("status");
+                Log.d("LIST"," "+jObject);
                 if(mInteger == 1) {
                     lDate = jObject.getString("date");
                     JSONArray jArray = jObject.getJSONArray("obs_glucose");
@@ -281,6 +284,8 @@ public class PacientListFragment extends Fragment implements View.OnClickListene
                         glucList.add(listGluc);
                         glucList1.add(listGluc1);
                     }
+                }else {
+                    mInteger = 2;
                 }
             } catch (JSONException e) {e.printStackTrace();mInteger = 3;}
             return mInteger;

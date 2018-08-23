@@ -80,16 +80,15 @@
         android:id="@+id/fab_pacient2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_change"
         android:visibility="invisible"
         app:backgroundTint="@color/bg_screen4"
         app:elevation="6dp"
-        app:pressedTranslationZ="12dp"
-        android:src="@drawable/ic_change"
         app:layout_constraintBottom_toTopOf="@+id/fab_pacient1"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="16dp" />
+        app:pressedTranslationZ="12dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_pacient1"

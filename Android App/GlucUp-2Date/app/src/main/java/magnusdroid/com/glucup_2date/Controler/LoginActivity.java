@@ -264,6 +264,7 @@ public class LoginActivity extends AppCompatActivity {
             MSendFCM mSendFCM = new MSendFCM();
             try {
                 jObject = mLogin.validateLogin(mDoc,mPassword);
+                Log.d("Rsp", " "+jObject);
                 mSendFCM.sendToken(mToken, mDoc);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -279,6 +280,7 @@ public class LoginActivity extends AppCompatActivity {
             String userLogin;
             try {
                 int status = jObject.getInt("status");
+                Log.i("status", "" + status);
                 if (status == 0) {
                     userLogin = jObject.getString("name");
                     prefManager.setUser(userLogin);

@@ -1,5 +1,6 @@
 package magnusdroid.com.glucup_2date.Model;
 
+import android.content.res.Resources;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -18,7 +19,7 @@ import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import magnusdroid.com.glucup_2date.R;
+import magnusdroid.com.glucup_2date.Class.Global;
 
 /**
  * Model to connect Android App to the server. Use HtppURLConnection class to build the request and
@@ -29,15 +30,17 @@ public class MLogin {
 
     private JSONObject jsonObject;
     private String response;
+    private Global global;
 
     public JSONObject validateLogin(String document, String password) throws JSONException {
 
         jsonObject = new JSONObject();
 
-        //String urlServer = "http://" + ipServer + ":8084/FHIRTest/LoginServlet";
-        //String urlServer = R.string.ipserver +"LoginServlet";
-        String urlServer = "http://186.113.30.230:8080/Glucometrias/LoginServlet";
+        global = new Global();
+
+        String urlServer = global.getUrl()+"LoginServlet";
         Map<String, Object> map = new LinkedHashMap<>();
+        Log.w("urlServer ", ""+urlServer);
 
         try {
             map.put("user", document);
@@ -70,6 +73,7 @@ public class MLogin {
                 for (int c; (c = in.read()) >= 0; )
                     sb.append((char) c);
                 response = sb.toString();
+                Log.w("Response ", ""+response);
                 jsonObject = new JSONObject(response);
             }else {
                 jsonObject.put("status",3);

@@ -20,6 +20,8 @@ import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import magnusdroid.com.glucup_2date.Class.Global;
+
 /**
  * Model to connect Android App to the server. Use HtppURLConnection class to build the request and
  * add the headers with the data.
@@ -30,14 +32,12 @@ public class MValueGlucose {
 
     private String Fix, Min, Max, response;
     private JSONObject jsonObject;
+    private Global global;
 
     public JSONObject getValue(String document, String fix, String min, String max, String mUnit) throws JSONException {
 
-
-        //String urlServer = "http://"+ipServer+":8084/FHIRTest/ListGlucose";
-        //String urlServer = "http://"+ipServer+":8084/FHIRTest/DateFilterGlucose";
-        //String urlServer = "http://"+ipServer+":8084/FHIRTest/ValueFilterGlucose";
-        String urlServer = "http://186.113.30.230:8080/Glucometrias/ValueFilterGlucose";
+        global = new Global();
+        String urlServer = global.getUrl()+"ValueFilterGlucose";
         Map<String,Object> map = new LinkedHashMap<>();
 
         if(mUnit.equalsIgnoreCase("mg/dl")){

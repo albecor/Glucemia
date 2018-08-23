@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import magnusdroid.com.glucup_2date.Class.Global;
 import magnusdroid.com.glucup_2date.Model.MListPacient;
 import magnusdroid.com.glucup_2date.Model.Pacient;
 import magnusdroid.com.glucup_2date.Model.PrefManager;
@@ -60,6 +61,7 @@ public class PacienteListActivity extends AppCompatActivity {
     // Utilities
     private ProgressDialog progress;
     private List<Pacient> pacientList = new ArrayList<>();
+    private Global global = new Global();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +134,7 @@ public class PacienteListActivity extends AppCompatActivity {
             startActivity(intent);
         }else if(id == R.id.action_personal_web){
             Intent myWebLink = new Intent(Intent.ACTION_VIEW);
-            myWebLink.setData(Uri.parse("http://186.113.30.230:8080/Glucometrias"));
+            myWebLink.setData(Uri.parse(global.getUrl()));
             startActivity(myWebLink);
         }else if(id == R.id.action_personal_logout){
             ViewDialog alert = new ViewDialog();

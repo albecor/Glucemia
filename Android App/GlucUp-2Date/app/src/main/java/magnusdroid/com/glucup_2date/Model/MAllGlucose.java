@@ -16,6 +16,7 @@ import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import magnusdroid.com.glucup_2date.Class.Global;
 import magnusdroid.com.glucup_2date.R;
 
 /**
@@ -28,11 +29,14 @@ public class MAllGlucose {
     private JSONObject jsonObject;
     private String response;
     public static final String DECODE = "UTF-8";
+    private Global global;
 
     public JSONObject getAll(String document) throws JSONException{
-        jsonObject = new JSONObject();
 
-        String urlServer = "http://186.113.30.230:8080/Glucometrias/ListGlucose";
+        jsonObject = new JSONObject();
+        global = new Global();
+
+        String urlServer = global.getUrl()+"ListGlucose";
         Map<String,Object> map = new LinkedHashMap<>();
 
         try {
